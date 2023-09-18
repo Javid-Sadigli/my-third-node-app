@@ -6,7 +6,7 @@ const app = express();
 const path = require('path');
 const mainRoot = path.dirname(require.main.filename);
 
-// const UserRouter = require('./routes/user');
+const UserRouter = require('./routes/user');
 const AdminRouter = require('./routes/admin');
 const ErrorController = require('./controllers/error');
 const ConsoleController = require('./controllers/console');
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 });
 app.use(ConsoleController.LOG_Request);
 
-// app.use('/', UserRouter);
+app.use('/', UserRouter);
 app.use('/admin', AdminRouter);
 app.use(ConsoleController.LOG_Not_Found);
 app.use(ErrorController.SEND_ERROR);

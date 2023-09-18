@@ -1,7 +1,7 @@
 const Product = require("../models/product");
 
 module.exports.GET_Home = (req,res,next) => {
-    Product.findAll().then((products) => {
+    Product.fetchAll().then((products) => {
         res.render('user/home', {PageTitle : 'Home', products: products});
     }).catch((err) => {
         console.log(err);
