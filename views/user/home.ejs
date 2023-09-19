@@ -22,8 +22,8 @@
                                 <img src="<%= product.image_link %>" alt="<%= product.title %>">
                             </div>
                         </div>
-                        <form class="product-buttons" method="post" action="/add-to-card/<%= product.id %>">
-                            <a href="/product-details?id=<%= product.id %>" class="product-a">Details</a>
+                        <form class="product-buttons" method="post" action="/add-to-card/<%= product._id %>">
+                            <a href="/product-details?id=<%= product._id %>" class="product-a">Details</a>
                             <button type="submit" class="product-button">Add to Card</button>
                         </form>
                     </div>

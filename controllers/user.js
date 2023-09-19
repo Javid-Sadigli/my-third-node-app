@@ -1,10 +1,8 @@
 const Product = require("../models/product");
 
 module.exports.GET_Home = (req,res,next) => {
-    Product.fetchAll().then((products) => {
+    Product.fetchAll((products) => {
         res.render('user/home', {PageTitle : 'Home', products: products});
-    }).catch((err) => {
-        console.log(err);
     });
 };
 module.exports.GET_Shop = (req,res,next) => {
@@ -30,10 +28,8 @@ module.exports.GET_Orders = (req,res,next) => {
 };
 module.exports.GET_Product_Details = (req,res,next) => {
     const productId = req.query.id;
-    Product.findByPk(productId).then((product) => {
+    Product.fetchById(productId, (product) => {
         res.render('user/product-details', {PageTitle : 'Details', product: product});
-    }).catch((err) => {
-        console.log(err);
     });
 };
 module.exports.POST_Add_To_Card = (req, res, next) => {

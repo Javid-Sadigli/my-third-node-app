@@ -8,7 +8,7 @@
     <main class="main">
         <section class="add-product-section">
             <form action="/admin/edit-product" method="post" class="add-product-form">
-                <input type="hidden" name="id" value="<%= product.id %>">
+                <input type="hidden" name="id" value="<%= product._id %>">
                 <div class="input-container">
                     <p class="add-product-p">Title : </p> 
                     <input type="text" name="title" class="add-product-input" value="<%= product.title %>">

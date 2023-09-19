@@ -1,5 +1,5 @@
 const getDb = require("../data/database").getDb;
-
+const mongodb = require("mongodb");
 
 class Product
 {   
@@ -20,13 +20,41 @@ class Product
         });
     }
 
-    static fetchAll()
+    static fetchAll(CALLBACK_FUNCTION)
     {
         const db = getDb();
-        return db.collection('products').find().toArray().then((products) => {
-            return products;
+        db.collection('products').find().toArray().then((products) => {
+            CALLBACK_FUNCTION(products);
         }).catch((err) => {
             console.log(err);
+        });
+    }
+    
+    static fetchById(id, CALLBACK_FUNCTION)
+    {
+        const db = getDb();
+        const _id = new mongodb.ObjectId(id);
+        db.collection('products').find({_id : _id}).next().then((product) => {
+            CALLBACK_FUNCTION(product);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+    static edit(id, newTitle, newDescription, newImageLink, newPrice, CALLBACK_FUNCTION)
+    {
+        const db = getDb();
+        const _id = new mongodb.ObjectId(id);
+        db.collection('products').updateOne({
+            _id : _id
+        }, {
+            $set : {
+                title : newTitle,
+                description : newDescription,
+                image_link : newImageLink,
+                price : newPrice
+            }
+        }).then(() => {
+            CALLBACK_FUNCTION();
         });
     }
 }
