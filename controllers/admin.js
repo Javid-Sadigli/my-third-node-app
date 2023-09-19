@@ -19,14 +19,12 @@ module.exports.GET_Products = (req, res, next) => {
         res.render('admin/products', {PageTitle : 'Products', products: products});
     });
 };
-// module.exports.POST_Delete_Product = (req, res, next) => {
-//     const productId = req.body.productId;
-//     Product.destroy({where : {id : productId}}).then(() => {
-//         res.redirect('/admin/products');
-//     }).catch((err) => {
-//         console.log(err);
-//     });
-// };
+module.exports.POST_Delete_Product = (req, res, next) => {
+    const productId = req.body.productId;
+    Product.deleteById(productId, () => {
+        res.redirect('/admin/products');
+    });
+};
 module.exports.GET_Edit_Product = (req, res, next) => {
     const productId = req.query.id;
     Product.fetchById(productId, (product) => {
@@ -34,7 +32,7 @@ module.exports.GET_Edit_Product = (req, res, next) => {
     });
 };
 module.exports.POST_Edit_Product = (req, res, next) => {
-    Product.edit(
+    Product.editById(
         req.body.id,
         req.body.title, 
         req.body.description,

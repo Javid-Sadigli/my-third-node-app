@@ -40,7 +40,7 @@ class Product
             console.log(err);
         });
     }
-    static edit(id, newTitle, newDescription, newImageLink, newPrice, CALLBACK_FUNCTION)
+    static editById(id, newTitle, newDescription, newImageLink, newPrice, CALLBACK_FUNCTION)
     {
         const db = getDb();
         const _id = new mongodb.ObjectId(id);
@@ -55,6 +55,18 @@ class Product
             }
         }).then(() => {
             CALLBACK_FUNCTION();
+        });
+    }
+    static deleteById(id, CALLBACK_FUNCTION)
+    {
+        const db = getDb();
+        const _id = new mongodb.ObjectId(id);
+        db.collection('products').deleteOne({
+            _id: _id
+        }).then(() => {
+            CALLBACK_FUNCTION();
+        }).catch((err) => {
+            console.log(err);
         });
     }
 }
