@@ -7,8 +7,8 @@ module.exports.GET_Add_Product = (req, res, next) => {
 };
 
 module.exports.POST_Add_Product = (req, res, next) => {
-    const product = new Product(req.body.title, req.body.description, req.body.image_link, req.body.price);
-    product.save().then(() => {
+    const product = new Product(req.body.title, req.body.description, req.body.image_link, req.body.price, req.user._id);
+    product.save(() => {
         console.log('Product saved successfully');
         res.redirect('/admin/products');
     });

@@ -3,18 +3,19 @@ const mongodb = require("mongodb");
 
 class Product
 {   
-    constructor(title, description, image_link, price)
+    constructor(title, description, image_link, price, userId)
     {
         this.title = title;
         this.description = description;
         this.image_link = image_link;
         this.price = price;
+        this.userId = userId;
     }
-    save()
+    save(CALLBACK_FUNCTION)
     {
         const db = getDb();
-        return db.collection('products').insertOne(this).then((result) => {
-            console.log(result);
+        db.collection('products').insertOne(this).then(() => {
+            CALLBACK_FUNCTION();
         }).catch((error) => {
             console.log(error);
         });

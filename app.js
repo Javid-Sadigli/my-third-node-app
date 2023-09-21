@@ -11,6 +11,7 @@ const AdminRouter = require('./routes/admin');
 const ErrorController = require('./controllers/error');
 const ConsoleController = require('./controllers/console');
 const mongo_db = require('./data/database');
+const User = require('./models/user');
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -19,13 +20,10 @@ const BodyParser = require('body-parser');
 app.use(BodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(mainRoot, 'public')));
 app.use((req, res, next) => {
-    // User.findByPk(1).then((user) => {
-    //     req.user = user;
-    //     next();
-    // }).catch(err => {
-    //     console.log(err);
-    // })
-    next();
+    User.fetchById('650c9c10fd0228ab8d75aec9', (user) => {
+        req.user = user;
+        next();
+    });
 });
 app.use(ConsoleController.LOG_Request);
 
