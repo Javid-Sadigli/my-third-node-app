@@ -8,7 +8,7 @@ class Product
         this.title = title;
         this.description = description;
         this.image_link = image_link;
-        this.price = price;
+        this.price = parseFloat(price);
         this.userId = userId;
     }
     save(CALLBACK_FUNCTION)
@@ -48,12 +48,12 @@ class Product
         db.collection('products').updateOne({
             _id : _id
         }, {
-            $set : {
-                title : newTitle,
-                description : newDescription,
-                image_link : newImageLink,
-                price : newPrice
-            }
+                $set : {
+                    title : newTitle,
+                    description : newDescription,
+                    image_link : newImageLink,
+                    price : parseFloat(newPrice)
+                }
         }).then(() => {
             CALLBACK_FUNCTION();
         });

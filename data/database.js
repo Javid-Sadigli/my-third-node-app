@@ -4,7 +4,7 @@ const MongoClient = mongodb.MongoClient;
 let _db;
 
 const mongoConnect = (CALLBACK_FUNCTION) => {
-    MongoClient.connect('mongodb+srv://JavidSadigli:17032005Cc.@mycluster.49vowqu.mongodb.net/myshop?retryWrites=true&w=majority').then((client) => {
+    MongoClient.connect('mongodb+srv://JavidSadigli:W61I0z0L3Ifrdxbd@mycluster.49vowqu.mongodb.net/myshop?retryWrites=true&w=majority').then((client) => {
         _db = client.db();
         CALLBACK_FUNCTION();
     }).catch((err) => {

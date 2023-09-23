@@ -20,8 +20,8 @@ const BodyParser = require('body-parser');
 app.use(BodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(mainRoot, 'public')));
 app.use((req, res, next) => {
-    User.fetchById('650c9c10fd0228ab8d75aec9', (user) => {
-        req.user = user;
+    User.fetchById('650ef9ebe19822e7321926ea', (user) => {
+        req.user = new User(user.username, user.email, user.password, user._id);
         next();
     });
 });
