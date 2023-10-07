@@ -19,7 +19,7 @@
                         <div class="order-products-div">
                             <ul class="products">
                                 <% order.products.forEach(product => { %>
-                                    <li class="product"><%= product.title %> (<%= product.orderItem.amount %>)</li>
+                                    <li class="product"><%= product.title %> (<%= product.amount %>)</li>
                                 <% }) %>
                             </ul>
                         </div>

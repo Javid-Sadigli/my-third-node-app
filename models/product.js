@@ -1,5 +1,6 @@
 const getDb = require("../data/database").getDb;
 const mongodb = require("mongodb");
+const User = require('./user');
 
 class Product
 {   
@@ -65,6 +66,12 @@ class Product
         db.collection('products').deleteOne({
             _id: _id
         }).then(() => {
+            return db.collection('users').find();
+        }).then((users) => {
+            users.forEach(user => {
+                const my_user = new User(user.username, user.email, undefined, user._id);
+                my_user.deleteFromCard(id, () => {});
+            });
             CALLBACK_FUNCTION();
         }).catch((err) => {
             console.log(err);
